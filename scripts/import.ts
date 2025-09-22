@@ -1,6 +1,6 @@
 import fs from "fs";
 import csv from "csv-parser";
-import { PrismaClient } from "../app/generated/prisma"; // adjust path if needed
+import { PrismaClient } from "@prisma/client"; // adjust path if needed
 
 const db = new PrismaClient();
 

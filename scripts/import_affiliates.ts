@@ -1,6 +1,6 @@
 import fs from "fs";
 import csv from "csv-parser";
-import { PrismaClient } from "../app/generated/prisma";
+import { PrismaClient } from "@prisma/client";
 const db = new PrismaClient();
 
 async function run() {
@@ -11,29 +11,29 @@ async function run() {
     .on("data", (r) => {
       // pass decimals as strings; leave empties as null
       rows.push({
-        aw_deep_link:        empty(r.aw_deep_link),
-        product_name:        empty(r.product_name),
-        aw_product_id:       empty(r.aw_product_id),
+        aw_deep_link: empty(r.aw_deep_link),
+        product_name: empty(r.product_name),
+        aw_product_id: empty(r.aw_product_id),
         merchant_product_id: empty(r.merchant_product_id),
-        merchant_image_url:  empty(r.merchant_image_url),
-        description:         empty(r.description),
-        merchant_category:   empty(r.merchant_category),
+        merchant_image_url: empty(r.merchant_image_url),
+        description: empty(r.description),
+        merchant_category: empty(r.merchant_category),
 
-        search_price:  numOrNull(r.search_price),
-        store_price:   numOrNull(r.store_price),
+        search_price: numOrNull(r.search_price),
+        store_price: numOrNull(r.store_price),
         delivery_cost: numOrNull(r.delivery_cost),
 
-        merchant_name:       empty(r.merchant_name),
-        merchant_id:         empty(r.merchant_id),
-        category_name:       empty(r.category_name),
-        category_id:         empty(r.category_id),
-        aw_image_url:        empty(r.aw_image_url),
-        currency:            empty(r.currency),
-        merchant_deep_link:  empty(r.merchant_deep_link),
+        merchant_name: empty(r.merchant_name),
+        merchant_id: empty(r.merchant_id),
+        category_name: empty(r.category_name),
+        category_id: empty(r.category_id),
+        aw_image_url: empty(r.aw_image_url),
+        currency: empty(r.currency),
+        merchant_deep_link: empty(r.merchant_deep_link),
 
-        last_updated:  empty(r.last_updated),
+        last_updated: empty(r.last_updated),
         display_price: empty(r.display_price),
-        data_feed_id:  empty(r.data_feed_id),
+        data_feed_id: empty(r.data_feed_id),
       });
     })
     .on("end", async () => {
@@ -45,7 +45,9 @@ async function run() {
           data: chunk,
           skipDuplicates: true, // safe if you later add a unique constraint
         });
-        console.log(`Inserted ${Math.min(i + BATCH, rows.length)} / ${rows.length}`);
+        console.log(
+          `Inserted ${Math.min(i + BATCH, rows.length)} / ${rows.length}`
+        );
       }
       await db.$disconnect();
       console.log("Import complete.");
@@ -53,7 +55,9 @@ async function run() {
 }
 
 function empty(v: any) {
-  return v === undefined || v === null || String(v).trim() === "" ? null : String(v);
+  return v === undefined || v === null || String(v).trim() === ""
+    ? null
+    : String(v);
 }
 function numOrNull(v: any) {
   const s = String(v ?? "").trim();
