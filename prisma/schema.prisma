@@ -11,7 +11,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgresql://neondb_owner:npg_vb9lWIe0Utxd@ep-dark-moon-adflindb.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
 }
 
 // Affiliate Product Table Model
