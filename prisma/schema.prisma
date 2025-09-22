@@ -1,0 +1,80 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  // output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Affiliate Product Table Model
+model AffiliateProduct {
+  id                   Int      @id @default(autoincrement())
+
+  aw_deep_link         String?
+  product_name         String?
+  aw_product_id        String?
+  merchant_product_id  String?
+  merchant_image_url   String?
+  description          String?
+  merchant_category    String?
+
+  // Money/numbers as Decimal (you can pass strings from CSV)
+  search_price         Decimal? @db.Decimal(12, 2)
+  store_price          Decimal? @db.Decimal(12, 2)
+  delivery_cost        Decimal? @db.Decimal(12, 2)
+
+  merchant_name        String?
+  merchant_id          String?
+  category_name        String?
+  category_id          String?
+  aw_image_url         String?
+  currency             String?
+  merchant_deep_link   String?
+
+  // Keep simple: store raw string from CSV (you can switch to DateTime later)
+  last_updated         String?
+  display_price        String?
+  data_feed_id         String?
+
+  @@index([aw_product_id])
+  @@index([merchant_id])
+  @@index([category_id])
+}
+
+// Blog Table Model
+model Blog {
+  id          Int      @id @default(autoincrement())
+  title       String
+  slug        String   @unique
+  excerpt     String?  // short description / meta description
+  content     String   // full blog content
+  author      String   // you can later convert this into a relation with User table
+  coverImage  String?  // optional feature image
+  category    String?  // e.g. Travel, Insurance, Lifestyle
+  tags        String[] // store as string array in Postgres
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  isPublished Boolean  @default(false)
+}
+// Banner Table Model
+model Banner {
+  id          Int      @id @default(autoincrement())
+  title       String
+  imageUrl    String
+  category    String?
+  link        String?
+  isFeatured  Boolean? @default(false)
+  startDate   DateTime?
+  endDate     DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
