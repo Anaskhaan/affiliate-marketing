@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import ProductCard from "../ProductCard";
 
 export default async function Section() {
   const [products, blogs, banners] = await Promise.all([
@@ -159,43 +160,14 @@ export default async function Section() {
 
           <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6'>
             {products.map((product, index) => (
-              <article
+              <ProductCard
                 key={product.id}
-                className='group relative bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 p-4 border border-gray-100 hover:border-blue-200'>
-                <div className='relative mb-4 flex justify-center items-center h-32 bg-gray-50 rounded-lg overflow-hidden'>
-                  {product.merchant_image_url ? (
-                    <img
-                      src={product.merchant_image_url}
-                      alt={product.product_name}
-                      className='max-h-20 max-w-full object-contain transition-transform group-hover:scale-105 duration-300'
-                      loading={index < 3 ? "eager" : "lazy"}
-                    />
-                  ) : (
-                    <div className='w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center rounded-lg'>
-                      <span className='text-2xl'>🛒</span>
-                    </div>
-                  )}
-                  <div className='absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full'>
-                    New
-                  </div>
-                </div>
-
-                <h3 className='text-sm font-semibold text-gray-900 mb-2 line-clamp-2 text-center group-hover:text-blue-600 transition-colors'>
-                  {product.product_name}
-                </h3>
-
-                <p className='text-lg font-bold text-blue-600 text-center mb-4'>
-                  {product.display_price}
-                </p>
-
-                <a
-                  href={product.merchant_deep_link || "#"}
-                  target='_blank'
-                  rel='noopener noreferrer nofollow'
-                  className='block w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-center text-sm font-semibold py-2 px-4 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl'>
-                  Shop Now
-                </a>
-              </article>
+                id={product.id}
+                product_name={product.product_name}
+                merchant_image_url={product.merchant_image_url}
+                display_price={product.display_price}
+                store_price={product.store_price}
+              />
             ))}
           </div>
         </section>
