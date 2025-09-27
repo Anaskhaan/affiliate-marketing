@@ -1,0 +1,172 @@
+/*
+  Warnings:
+
+  - You are about to drop the `AffiliateProduct` table. If the table is not empty, all the data it contains will be lost.
+  - You are about to drop the `User` table. If the table is not empty, all the data it contains will be lost.
+
+*/
+-- DropTable
+DROP TABLE "public"."AffiliateProduct";
+
+-- DropTable
+DROP TABLE "public"."User";
+
+-- CreateTable
+CREATE TABLE "public"."affiliate_products" (
+    "aw_deep_link" TEXT,
+    "product_name" TEXT,
+    "aw_product_id" TEXT NOT NULL,
+    "merchant_product_id" TEXT,
+    "merchant_image_url" TEXT,
+    "description" TEXT,
+    "merchant_category" TEXT,
+    "search_price" DOUBLE PRECISION,
+    "merchant_id" TEXT,
+    "merchant_name" TEXT,
+    "category_name" TEXT,
+    "category_id" TEXT,
+    "aw_image_url" TEXT,
+    "currency" TEXT,
+    "store_price" DOUBLE PRECISION,
+    "merchant_deep_link" TEXT,
+    "language" TEXT,
+    "display_price" TEXT,
+    "data_feed_id" TEXT,
+    "savings_percent" DOUBLE PRECISION,
+    "saving" DOUBLE PRECISION,
+    "base_price" DOUBLE PRECISION,
+    "base_price_amount" DOUBLE PRECISION,
+    "parent_product_id" TEXT,
+    "brand_name" TEXT,
+    "colour" TEXT,
+    "brand_id" TEXT,
+    "product_short_description" TEXT,
+    "specifications" TEXT,
+    "dimensions" TEXT,
+    "product_type" TEXT,
+    "product_model" TEXT,
+    "model_number" TEXT,
+    "commission_group" TEXT,
+    "rrp_price" DOUBLE PRECISION,
+    "base_price_text" TEXT,
+    "product_price_old" DOUBLE PRECISION,
+    "merchant_thumb_url" TEXT,
+    "large_image" TEXT,
+    "alternate_image" TEXT,
+    "aw_thumb_url" TEXT,
+    "alternate_image_two" TEXT,
+    "alternate_image_three" TEXT,
+    "alternate_image_four" TEXT,
+    "reviews" TEXT,
+    "average_rating" DOUBLE PRECISION,
+    "rating" DOUBLE PRECISION,
+    "number_available" INTEGER,
+    "ean" TEXT,
+    "isbn" TEXT,
+    "upc" TEXT,
+    "mpn" TEXT,
+    "product_gtin" TEXT,
+    "fashion_suitable_for" TEXT,
+    "fashion_category" TEXT,
+    "fashion_size" TEXT,
+    "fashion_material" TEXT,
+    "fashion_pattern" TEXT,
+    "fashion_swatch" TEXT,
+    "travel_check_in_date" TIMESTAMP(3),
+    "travel_check_in_time" TEXT,
+    "travel_check_out_date" TIMESTAMP(3),
+    "travel_duration" TEXT,
+    "travel_guests_per_room" INTEGER,
+    "travel_hotel_name" TEXT,
+    "travel_hotel_address" TEXT,
+    "travel_hotel_stars" INTEGER,
+    "travel_hotel_features" TEXT,
+    "travel_child_policy" TEXT,
+    "travel_room_type" TEXT,
+    "travel_room_description" TEXT,
+    "travel_availability" TEXT,
+    "travel_board_basis" TEXT,
+    "travel_latitude" DOUBLE PRECISION,
+    "travel_departure_code" TEXT,
+    "travel_arrival_code" TEXT,
+    "travel_departure_date" TIMESTAMP(3),
+    "travel_return_date" TIMESTAMP(3),
+    "travel_inbound_duration" TEXT,
+    "travel_starting_from_price" DOUBLE PRECISION,
+    "travel_check_out_time" TEXT,
+    "travel_ticket_type" TEXT,
+    "travel_cancellation_policy" TEXT,
+    "travel_room_amenities" TEXT,
+    "travel_destination_name" TEXT,
+    "travel_destination_address" TEXT,
+    "travel_destination_zipcode" TEXT,
+    "travel_destination_city" TEXT,
+    "travel_destination_region" TEXT,
+    "travel_destination_country" TEXT,
+    "travel_destination_coordinates" TEXT,
+    "travel_destination_type" TEXT,
+    "travel_travel_rating" DOUBLE PRECISION,
+    "travel_travel_transport" TEXT,
+    "travel_travel_pax_min" INTEGER,
+    "travel_travel_pax_max" INTEGER,
+    "travel_travel_type" TEXT,
+    "travel_price_per_person" DOUBLE PRECISION,
+    "tickets_primary_artist" TEXT,
+    "tickets_second_artist" TEXT,
+    "tickets_event_date" TIMESTAMP(3),
+    "tickets_event_name" TEXT,
+    "tickets_venue_name" TEXT,
+    "tickets_venue_address" TEXT,
+    "tickets_available_from" TIMESTAMP(3),
+    "tickets_genre" TEXT,
+    "tickets_min_price" DOUBLE PRECISION,
+    "tickets_max_price" DOUBLE PRECISION,
+    "tickets_event_location_address" TEXT,
+    "tickets_longitude" DOUBLE PRECISION,
+    "travel_longitude" DOUBLE PRECISION,
+    "tickets_event_location_region" TEXT,
+    "tickets_event_location_coordinates" TEXT,
+    "tickets_event_location_city" TEXT,
+    "tickets_event_location_country" TEXT,
+    "tickets_event_duration" TEXT,
+    "travel_location" TEXT,
+
+    CONSTRAINT "affiliate_products_pkey" PRIMARY KEY ("aw_product_id")
+);
+
+-- CreateTable
+CREATE TABLE "public"."Blog" (
+    "id" SERIAL NOT NULL,
+    "title" TEXT NOT NULL,
+    "slug" TEXT NOT NULL,
+    "excerpt" TEXT,
+    "content" TEXT NOT NULL,
+    "author" TEXT NOT NULL,
+    "coverImage" TEXT,
+    "category" TEXT,
+    "tags" TEXT[],
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "isPublished" BOOLEAN NOT NULL DEFAULT false,
+
+    CONSTRAINT "Blog_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "public"."Banner" (
+    "id" SERIAL NOT NULL,
+    "title" TEXT NOT NULL,
+    "imageUrl" TEXT NOT NULL,
+    "category" TEXT,
+    "link" TEXT,
+    "isFeatured" BOOLEAN DEFAULT false,
+    "startDate" TIMESTAMP(3),
+    "endDate" TIMESTAMP(3),
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Banner_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Blog_slug_key" ON "public"."Blog"("slug");

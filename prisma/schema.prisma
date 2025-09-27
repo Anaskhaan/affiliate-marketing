@@ -11,43 +11,134 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://neondb_owner:npg_vb9lWIe0Utxd@ep-dark-moon-adflindb.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+  url = env("DATABASE_URL")
 }
 
 // Affiliate Product Table Model
 model AffiliateProduct {
-  id                   Int      @id @default(autoincrement())
+  id                Int      @id @default(autoincrement())
+  aw_deep_link                 String? 
+  product_name                 String?
+  aw_product_id                String?
+  merchant_product_id          String?
+  merchant_image_url           String?
+  description                  String?
+  merchant_category            String?
+  search_price                 Float?
+  merchant_id                  String?
+  merchant_name                String?
+  category_name                String?
+  sub_category                 String?
+  category_id                  String?
+  aw_image_url                 String?
+  currency                     String?
+  store_price                  Float?
+  merchant_deep_link           String?
+  language                     String?
+  display_price                String?
+  data_feed_id                 String?
+  savings_percent              Float?
+  saving                       Float?
+  base_price                   Float?
+  base_price_amount            Float?
+  parent_product_id            String?
+  brand_name                   String?
+  colour                       String?
+  brand_id                     String?
+  product_short_description    String?
+  specifications               String?
+  dimensions                   String?
+  product_type                 String?
+  product_model                String?
+  model_number                 String?
+  commission_group             String?
+  rrp_price                    Float?
+  base_price_text              String?
+  product_price_old            Float?
+  merchant_thumb_url           String?
+  large_image                  String?
+  alternate_image              String?
+  aw_thumb_url                 String?
+  alternate_image_two          String?
+  alternate_image_three        String?
+  alternate_image_four         String?
+  reviews                      String?
+  average_rating               Float?
+  rating                       Float?
+  number_available             Int?
+  ean                          String?
+  isbn                         String?
+  upc                          String?
+  mpn                          String?
+  product_gtin                 String?
+  fashion_suitable_for         String?
+  fashion_category             String?
+  fashion_size                 String?
+  fashion_material             String?
+  fashion_pattern              String?
+  fashion_swatch               String?
+  travel_check_in_date         DateTime?
+  travel_check_in_time         String?
+  travel_check_out_date        DateTime?
+  travel_duration              String?
+  travel_guests_per_room       Int?
+  travel_hotel_name            String?
+  travel_hotel_address         String?
+  travel_hotel_stars           Int?
+  travel_hotel_features        String?
+  travel_child_policy          String?
+  travel_room_type             String?
+  travel_room_description      String?
+  travel_availability          String?
+  travel_board_basis           String?
+  travel_latitude              Float?
+  travel_departure_code        String?
+  travel_arrival_code          String?
+  travel_departure_date        DateTime?
+  travel_return_date           DateTime?
+  travel_inbound_duration      String?
+  travel_starting_from_price   Float?
+  travel_check_out_time        String?
+  travel_ticket_type           String?
+  travel_cancellation_policy   String?
+  travel_room_amenities        String?
+  travel_destination_name      String?
+  travel_destination_address   String?
+  travel_destination_zipcode   String?
+  travel_destination_city      String?
+  travel_destination_region    String?
+  travel_destination_country   String?
+  travel_destination_coordinates String?
+  travel_destination_type      String?
+  travel_travel_rating         Float?
+  travel_travel_transport      String?
+  travel_travel_pax_min        Int?
+  travel_travel_pax_max        Int?
+  travel_travel_type           String?
+  travel_price_per_person      Float?
+  tickets_primary_artist       String?
+  tickets_second_artist        String?
+  tickets_event_date           DateTime?
+  tickets_event_name           String?
+  tickets_venue_name           String?
+  tickets_venue_address        String?
+  tickets_available_from       DateTime?
+  tickets_genre                String?
+  tickets_min_price            Float?
+  tickets_max_price            Float?
+  tickets_event_location_address String?
+  tickets_longitude            Float?
+  travel_longitude             Float?
+  tickets_event_location_region String?
+  tickets_event_location_coordinates String?
+  tickets_event_location_city  String?
+  tickets_event_location_country String?
+  tickets_event_duration       String?
+  travel_location              String?
 
-  aw_deep_link         String?
-  product_name         String?
-  aw_product_id        String?
-  merchant_product_id  String?
-  merchant_image_url   String?
-  description          String?
-  merchant_category    String?
-
-  // Money/numbers as Decimal (you can pass strings from CSV)
-  search_price         Decimal? @db.Decimal(12, 2)
-  store_price          Decimal? @db.Decimal(12, 2)
-  delivery_cost        Decimal? @db.Decimal(12, 2)
-
-  merchant_name        String?
-  merchant_id          String?
-  category_name        String?
-  category_id          String?
-  aw_image_url         String?
-  currency             String?
-  merchant_deep_link   String?
-
-  // Keep simple: store raw string from CSV (you can switch to DateTime later)
-  last_updated         String?
-  display_price        String?
-  data_feed_id         String?
-
-  @@index([aw_product_id])
-  @@index([merchant_id])
-  @@index([category_id])
+  @@map("affiliate_products") // maps Prisma model to your actual table
 }
+
 
 // Blog Table Model
 model Blog {

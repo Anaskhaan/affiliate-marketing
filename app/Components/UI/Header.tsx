@@ -4,6 +4,7 @@ import { FC } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faBell, faUser } from "@fortawesome/free-regular-svg-icons";
 import { faBars, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 
 export const Header: FC = () => {
   return (
@@ -34,7 +35,9 @@ export const Header: FC = () => {
           </button>
 
           <div className='flex items-center font-bold text-2xl tracking-wide'>
-            <span className='ml-1'>Nexsol</span>
+            <Link href='/' className='ml-1'>
+              Nexsol
+            </Link>
           </div>
         </div>
 
